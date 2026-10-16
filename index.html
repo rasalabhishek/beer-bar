@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marathwada Beer Bar — Brand Identity</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Cinzel:wght@400;500;600;700;800;900&family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0A0A0A;
+    --charcoal: #111111;
+    --gold: #C9A84C;
+    --gold-light: #E8D48B;
+    --gold-bright: #F0DCA0;
+    --gold-dark: #8B6914;
+    --gold-deep: #6B4F0E;
+    --cream: #F5E6C8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--black);
+    color: var(--cream);
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* ===== KEYFRAMES ===== */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  @keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.7); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+  @keyframes growLine {
+    from { transform: scaleX(0); }
+    to   { transform: scaleX(1); }
+  }
+  @keyframes diamondSpin {
+    from { opacity: 0; transform: rotate(0deg) scale(0); }
+    to   { opacity: 1; transform: rotate(45deg) scale(1); }
+  }
+  @keyframes shimmer {
+    0%   { background-position: -200% center; }
+    100% { background-position: 200% center; }
+  }
+  @keyframes drawPath {
+    from { stroke-dashoffset: 2000; }
+    to   { stroke-dashoffset: 0; }
+  }
+  @keyframes pulseGlow {
+    0%, 100% { opacity: 0.05; transform: translate(-50%,-50%) scale(1); }
+    50%      { opacity: 0.12; transform: translate(-50%,-50%) scale(1.06); }
+  }
+  @keyframes floatUp {
+    0%   { transform: translateY(0) scale(1); opacity: 0; }
+    8%   { opacity: 0.8; }
+    92%  { opacity: 0.8; }
+    100% { transform: translateY(-500px) scale(0.2); opacity: 0; }
+  }
+  @keyframes gentleSway {
+    0%, 100% { transform: rotate(0deg); }
+    50%      { transform: rotate(2deg); }
+  }
+  @keyframes trackingExpand {
+    from { letter-spacing: 0px; opacity: 0; }
+    to   { letter-spacing: 14px; opacity: 1; }
+  }
+  @keyframes borderGlow {
+    0%, 100% { border-color: rgba(201,168,76,0.12); box-shadow: 0 0 0 rgba(201,168,76,0); }
+    50%      { border-color: rgba(201,168,76,0.4); box-shadow: 0 0 30px rgba(201,168,76,0.08); }
+  }
+  @keyframes textGlow {
+    0%, 100% { filter: drop-shadow(0 2px 12px rgba(201,168,76,0.25)); }
+    50%      { filter: drop-shadow(0 2px 24px rgba(201,168,76,0.45)); }
+  }
+  @keyframes rotateSlowly {
+    from { transform: translate(-50%,-50%) rotate(0deg); }
+    to   { transform: translate(-50%,-50%) rotate(360deg); }
+  }
+  @keyframes dotPulse {
+    0%, 100% { opacity: 0.15; r: 2; }
+    50%      { opacity: 0.5; r: 3; }
+  }
+
+  /* ===== HERO ===== */
+  .brand-hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 60px 20px;
+    background: var(--black);
+    overflow: hidden;
+  }
+
+  /* Radial gold glow — breathing */
+  .brand-hero::after {
+    content: '';
+    position: absolute;
+    width: 800px;
+    height: 800px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,168,76,0.12) 0%, rgba(201,168,76,0.03) 40%, transparent 70%);
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    animation: pulseGlow 5s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  /* Grain overlay */
+  .brand-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 256px;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* ===== PARTICLES ===== */
+  .particles {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .particle {
+    position: absolute;
+    bottom: -10px;
+    width: 3px; height: 3px;
+    background: var(--gold);
+    border-radius: 50%;
+    animation: floatUp linear infinite;
+    opacity: 0;
+  }
+  .particle:nth-child(1)  { left: 8%;  animation-duration: 9s;  animation-delay: 0s;   width: 2px; height: 2px; }
+  .particle:nth-child(2)  { left: 15%; animation-duration: 11s; animation-delay: 0.8s; }
+  .particle:nth-child(3)  { left: 25%; animation-duration: 8s;  animation-delay: 2s;   width: 2px; height: 2px; }
+  .particle:nth-child(4)  { left: 35%; animation-duration: 10s; animation-delay: 0.3s; }
+  .particle:nth-child(5)  { left: 45%; animation-duration: 12s; animation-delay: 3s;   width: 2px; height: 2px; }
+  .particle:nth-child(6)  { left: 52%; animation-duration: 7s;  animation-delay: 1.2s; }
+  .particle:nth-child(7)  { left: 60%; animation-duration: 9s;  animation-delay: 4s;   width: 2px; height: 2px; }
+  .particle:nth-child(8)  { left: 68%; animation-duration: 11s; animation-delay: 1.8s; }
+  .particle:nth-child(9)  { left: 75%; animation-duration: 8s;  animation-delay: 5s;   width: 2px; height: 2px; }
+  .particle:nth-child(10) { left: 82%; animation-duration: 10s; animation-delay: 2.5s; }
+  .particle:nth-child(11) { left: 88%; animation-duration: 13s; animation-delay: 0.6s; width: 2px; height: 2px; }
+  .particle:nth-child(12) { left: 94%; animation-duration: 9s;  animation-delay: 3.5s; }
+  .particle:nth-child(13) { left: 5%;  animation-duration: 10s; animation-delay: 6s;   width: 2px; height: 2px; }
+  .particle:nth-child(14) { left: 40%; animation-duration: 14s; animation-delay: 1s; }
+  .particle:nth-child(15) { left: 58%; animation-duration: 8s;  animation-delay: 4.5s; width: 2px; height: 2px; }
+  .particle:nth-child(16) { left: 72%; animation-duration: 11s; animation-delay: 7s; }
+
+  /* ===== LOGO CONTAINER ===== */
+  .logo-container {
+    position: relative;
+    width: 660px;
+    max-width: 94vw;
+    aspect-ratio: 1 / 1.3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+  }
+
+  /* ===== ARCH FRAME ===== */
+  .arch-frame {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    animation: fadeIn 1.5s ease-out 0.3s forwards;
+  }
+  .arch-frame svg { width: 100%; height: 100%; }
+
+  .arch-outer {
+    stroke-dasharray: 2000;
+    stroke-dashoffset: 2000;
+    animation: drawPath 2.5s ease-in-out 0.5s forwards;
+  }
+  .arch-inner {
+    stroke-dasharray: 2000;
+    stroke-dashoffset: 2000;
+    animation: drawPath 2.5s ease-in-out 0.8s forwards;
+  }
+  .arch-detail {
+    opacity: 0;
+    animation: fadeIn 1s ease-out 2.5s forwards;
+  }
+  .arch-detail-late {
+    opacity: 0;
+    animation: fadeIn 0.8s ease-out 3s forwards;
+  }
+  .dot-pulse {
+    animation: dotPulse 3s ease-in-out infinite;
+  }
+
+  /* ===== ORNAMENTS ===== */
+  .top-ornament, .bottom-ornament {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    z-index: 2;
+  }
+  .top-ornament { margin-bottom: 18px; }
+  .bottom-ornament { margin-top: 18px; }
+
+  .ornament-line {
+    width: 70px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    transform-origin: center;
+    transform: scaleX(0);
+    animation: growLine 0.8s ease-out 1.2s forwards;
+  }
+  .ornament-diamond {
+    width: 8px; height: 8px;
+    border: 1px solid var(--gold);
+    opacity: 0;
+    animation: diamondSpin 0.6s ease-out 1.0s forwards;
+  }
+  .bottom-ornament .ornament-line { animation-delay: 2.8s; }
+  .bottom-ornament .ornament-diamond { animation-delay: 2.6s; }
+
+  /* ===== EST TEXT ===== */
+  .est-text {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 11px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease-out 1.4s forwards;
+    z-index: 2;
+  }
+
+  /* ===== BRAND NAME — premium shimmer + glow ===== */
+  .brand-name {
+    font-family: 'Cinzel', serif;
+    font-weight: 900;
+    font-size: clamp(38px, 7.5vw, 68px);
+    letter-spacing: 8px;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 1.05;
+    background: linear-gradient(
+      100deg,
+      var(--gold-deep) 0%,
+      var(--gold-dark) 15%,
+      var(--gold) 28%,
+      var(--gold-light) 38%,
+      var(--gold-bright) 45%,
+      #FFFDE8 50%,
+      var(--gold-bright) 55%,
+      var(--gold-light) 62%,
+      var(--gold) 72%,
+      var(--gold-dark) 85%,
+      var(--gold-deep) 100%
+    );
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative;
+    z-index: 2;
+    opacity: 0;
+    animation:
+      fadeUp 1s ease-out 1.6s forwards,
+      shimmer 3.5s ease-in-out 2.8s infinite,
+      textGlow 4s ease-in-out 2.8s infinite;
+  }
+
+  /* ===== BEER MUG EMBLEM ===== */
+  .emblem {
+    margin: 8px 0 4px;
+    z-index: 2;
+    opacity: 0;
+    animation: scaleIn 0.7s ease-out 1.9s forwards;
+  }
+  .emblem svg {
+    width: 50px;
+    height: 50px;
+  }
+
+  /* ===== DIVIDER ===== */
+  .name-divider {
+    width: 320px;
+    max-width: 75%;
+    height: 28px;
+    margin: 6px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    opacity: 0;
+    animation: scaleIn 0.7s ease-out 2.0s forwards;
+  }
+  .name-divider svg { width: 100%; height: 100%; }
+
+  /* ===== SUBTITLE ===== */
+  .brand-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: clamp(16px, 3vw, 26px);
+    letter-spacing: 0px;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-align: center;
+    z-index: 2;
+    opacity: 0;
+    animation: trackingExpand 1s ease-out 2.2s forwards;
+  }
+
+  /* ===== WHEAT MOTIF ===== */
+  .wheat-motif {
+    margin-top: 18px;
+    z-index: 2;
+    opacity: 0;
+    animation: fadeUp 0.8s ease-out 2.6s forwards;
+  }
+  .wheat-motif svg {
+    width: 180px;
+    height: auto;
+    animation: gentleSway 6s ease-in-out infinite;
+    transform-origin: center bottom;
+  }
+
+  /* ===== SHOWCASE ===== */
+  .showcase {
+    padding: 80px 40px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .section-label {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--gold);
+    opacity: 0;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+  }
+  .section-label.visible { animation: fadeUp 0.6s ease-out forwards; }
+
+  /* Palette */
+  .palette-row {
+    display: flex;
+    gap: 3px;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 60px;
+    height: 90px;
+  }
+  .palette-swatch {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding-bottom: 10px;
+    transform-origin: bottom;
+    opacity: 0;
+    transform: scaleY(0);
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease;
+  }
+  .palette-swatch.visible { opacity: 1; transform: scaleY(1); }
+  .palette-swatch span {
+    font-family: 'Inter'; font-size: 10px;
+    letter-spacing: 1px; font-weight: 500; opacity: 0.9;
+  }
+  .swatch-black    { background: var(--black); border: 1px solid #222; }
+  .swatch-black span { color: var(--cream); }
+  .swatch-charcoal { background: var(--charcoal); }
+  .swatch-charcoal span { color: var(--cream); }
+  .swatch-gold-dark { background: var(--gold-dark); }
+  .swatch-gold-dark span { color: var(--black); }
+  .swatch-gold     { background: var(--gold); }
+  .swatch-gold span { color: var(--black); }
+  .swatch-gold-light { background: var(--gold-light); }
+  .swatch-gold-light span { color: var(--black); }
+  .swatch-cream    { background: var(--cream); }
+  .swatch-cream span { color: var(--black); }
+
+  /* Typography */
+  .type-showcase { margin-bottom: 60px; }
+  .type-sample-primary {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: clamp(28px, 5vw, 48px);
+    letter-spacing: 3px;
+    background: linear-gradient(100deg, var(--gold-dark), var(--gold), var(--gold-light), #FFFBE6, var(--gold-light), var(--gold));
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 10px;
+    opacity: 0; transform: translateY(20px);
+    transition: all 0.8s ease-out;
+  }
+  .type-sample-primary.visible {
+    opacity: 1; transform: translateY(0);
+    animation: shimmer 5s ease-in-out 1s infinite;
+  }
+  .type-sample-secondary {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(18px, 3vw, 28px);
+    color: var(--cream); opacity: 0;
+    margin-bottom: 8px; font-style: italic;
+    transform: translateY(20px);
+    transition: all 0.8s ease-out 0.15s;
+  }
+  .type-sample-secondary.visible { opacity: 0.7; transform: translateY(0); }
+  .type-sample-body {
+    font-family: 'Inter'; font-weight: 300;
+    font-size: 14px; color: var(--cream); opacity: 0;
+    letter-spacing: 0.5px; line-height: 1.7; max-width: 500px;
+    transform: translateY(20px);
+    transition: all 0.8s ease-out 0.3s;
+  }
+  .type-sample-body.visible { opacity: 0.5; transform: translateY(0); }
+
+  /* Variants */
+  .variant-section {
+    padding: 80px 40px;
+    display: flex; flex-direction: column;
+    align-items: center; gap: 60px;
+    background:
+      radial-gradient(ellipse 70% 40% at 50% 50%, rgba(201,168,76,0.03) 0%, transparent 70%),
+      linear-gradient(180deg, var(--charcoal), var(--black));
+  }
+  .variant-wrapper {
+    opacity: 0; transform: translateY(30px);
+    transition: all 0.7s ease-out;
+  }
+  .variant-wrapper.visible { opacity: 1; transform: translateY(0); }
+  .variant-card {
+    width: 480px; max-width: 90vw;
+    aspect-ratio: 1.6 / 1; border-radius: 4px;
+    display: flex; align-items: center;
+    justify-content: center; flex-direction: column;
+    overflow: hidden;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+  }
+  .variant-card:hover { transform: scale(1.02); }
+  .variant-dark {
+    background: var(--black);
+    border: 1px solid rgba(201,168,76,0.2);
+    animation: borderGlow 3s ease-in-out infinite;
+  }
+  .variant-light { background: var(--cream); }
+  .variant-card .v-name {
+    font-family: 'Cinzel', serif; font-weight: 800;
+    font-size: clamp(20px, 4vw, 32px);
+    letter-spacing: 4px; text-transform: uppercase;
+  }
+  .variant-dark .v-name {
+    background: linear-gradient(100deg, var(--gold-dark), var(--gold), var(--gold-light), #FFFBE6, var(--gold-light), var(--gold));
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer 5s ease-in-out infinite;
+  }
+  .variant-light .v-name { color: var(--black); }
+  .variant-card .v-sub {
+    font-family: 'Inter'; font-weight: 500;
+    font-size: clamp(10px, 2vw, 14px);
+    letter-spacing: 8px; text-transform: uppercase; margin-top: 6px;
+  }
+  .variant-dark .v-sub { color: var(--gold); opacity: 0.8; }
+  .variant-light .v-sub { color: var(--gold-dark); }
+  .variant-label {
+    font-family: 'Inter'; font-size: 11px;
+    letter-spacing: 2px; color: var(--cream);
+    opacity: 0.35; text-transform: uppercase; margin-top: 12px;
+  }
+
+  /* Footer */
+  .brand-footer {
+    padding: 60px 20px 40px;
+    text-align: center;
+    background: var(--black);
+  }
+  .footer-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300; font-style: italic;
+    font-size: clamp(18px, 3vw, 26px);
+    color: var(--gold); opacity: 0;
+    margin-bottom: 30px;
+    transition: opacity 1s ease-out;
+  }
+  .footer-tagline.visible { opacity: 0.5; }
+  .footer-line {
+    width: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-dark), transparent);
+    margin: 0 auto;
+    transition: width 1s ease-out 0.3s;
+  }
+  .footer-line.visible { width: 60px; }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .brand-name { letter-spacing: 3px; }
+    .brand-subtitle { animation-name: fadeIn !important; letter-spacing: 8px; }
+    .palette-row { height: 70px; flex-wrap: wrap; }
+    .palette-swatch { min-width: calc(33% - 2px); }
+    .showcase { padding: 60px 20px; }
+    .variant-section { padding: 60px 20px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+    .brand-name, .arch-frame, .est-text, .brand-subtitle,
+    .name-divider, .wheat-motif, .emblem { opacity: 1 !important; }
+    .ornament-line { transform: scaleX(1) !important; }
+    .ornament-diamond { opacity: 1 !important; transform: rotate(45deg) !important; }
+    .palette-swatch { opacity: 1 !important; transform: scaleY(1) !important; }
+  }
+</style>
+</head>
+<body>
+
+<section class="brand-hero">
+  <!-- Floating gold particles — 16 for denser effect -->
+  <div class="particles">
+    <div class="particle"></div><div class="particle"></div>
+    <div class="particle"></div><div class="particle"></div>
+    <div class="particle"></div><div class="particle"></div>
+    <div class="particle"></div><div class="particle"></div>
+    <div class="particle"></div><div class="particle"></div>
+    <div class="particle"></div><div class="particle"></div>
+    <div class="particle"></div><div class="particle"></div>
+    <div class="particle"></div><div class="particle"></div>
+  </div>
+
+  <div class="logo-container">
+
+    <!-- Ultra-premium arch frame with decorative filigree -->
+    <div class="arch-frame">
+      <svg viewBox="0 0 660 860" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="goldGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#E8D48B"/>
+            <stop offset="50%" stop-color="#C9A84C"/>
+            <stop offset="100%" stop-color="#8B6914"/>
+          </linearGradient>
+          <linearGradient id="goldH" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="transparent"/>
+            <stop offset="50%" stop-color="#C9A84C"/>
+            <stop offset="100%" stop-color="transparent"/>
+          </linearGradient>
+        </defs>
+
+        <!-- OUTER ARCH — animated draw -->
+        <path class="arch-outer" d="M55 860 L55 300 Q55 55 330 55 Q605 55 605 300 L605 860"
+              stroke="url(#goldGrad)" stroke-width="1.8" fill="none"/>
+        <!-- INNER ARCH -->
+        <path class="arch-inner" d="M80 860 L80 310 Q80 85 330 85 Q580 85 580 310 L580 860"
+              stroke="url(#goldGrad)" stroke-width="0.7" fill="none"/>
+
+        <!-- Decorative top crown -->
+        <path class="arch-detail" d="M318 50 L330 22 L342 50" stroke="#C9A84C" stroke-width="1" fill="none"/>
+        <circle class="arch-detail" cx="330" cy="18" r="2" fill="#C9A84C" style="animation-delay:2.7s"/>
+
+        <!-- Corner bracket ornaments — top left -->
+        <line class="arch-detail" x1="32" y1="295" x2="55" y2="295" stroke="#C9A84C" stroke-width="0.8"/>
+        <line class="arch-detail" x1="32" y1="315" x2="55" y2="315" stroke="#C9A84C" stroke-width="0.6" style="animation-delay:2.7s"/>
+        <line class="arch-detail" x1="32" y1="295" x2="32" y2="315" stroke="#C9A84C" stroke-width="0.6" style="animation-delay:2.8s"/>
+        <!-- Corner bracket ornaments — top right -->
+        <line class="arch-detail" x1="605" y1="295" x2="628" y2="295" stroke="#C9A84C" stroke-width="0.8"/>
+        <line class="arch-detail" x1="605" y1="315" x2="628" y2="315" stroke="#C9A84C" stroke-width="0.6" style="animation-delay:2.7s"/>
+        <line class="arch-detail" x1="628" y1="295" x2="628" y2="315" stroke="#C9A84C" stroke-width="0.6" style="animation-delay:2.8s"/>
+
+        <!-- Bottom decorative lines -->
+        <line class="arch-detail" x1="55" y1="830" x2="605" y2="830" stroke="#C9A84C" stroke-width="0.5" style="animation-delay:2.9s"/>
+        <line class="arch-detail" x1="80" y1="842" x2="580" y2="842" stroke="#C9A84C" stroke-width="0.4" style="animation-delay:3.0s"/>
+
+        <!-- Side dots — PULSING for premium feel -->
+        <circle class="arch-detail dot-pulse" cx="55" cy="400" r="2" fill="#C9A84C" style="animation-delay:2.7s"/>
+        <circle class="arch-detail dot-pulse" cx="605" cy="400" r="2" fill="#C9A84C" style="animation-delay:2.7s"/>
+        <circle class="arch-detail dot-pulse" cx="55" cy="500" r="2" fill="#C9A84C" style="animation-delay:2.9s"/>
+        <circle class="arch-detail dot-pulse" cx="605" cy="500" r="2" fill="#C9A84C" style="animation-delay:2.9s"/>
+        <circle class="arch-detail dot-pulse" cx="55" cy="600" r="2" fill="#C9A84C" style="animation-delay:3.1s"/>
+        <circle class="arch-detail dot-pulse" cx="605" cy="600" r="2" fill="#C9A84C" style="animation-delay:3.1s"/>
+        <circle class="arch-detail dot-pulse" cx="55" cy="700" r="2" fill="#C9A84C" style="animation-delay:3.3s"/>
+        <circle class="arch-detail dot-pulse" cx="605" cy="700" r="2" fill="#C9A84C" style="animation-delay:3.3s"/>
+
+        <!-- Filigree scrollwork — top arch area -->
+        <path class="arch-detail-late" d="M200 120 Q220 105 240 115 Q260 125 280 110" stroke="#C9A84C" stroke-width="0.4" fill="none" opacity="0.35"/>
+        <path class="arch-detail-late" d="M380 110 Q400 125 420 115 Q440 105 460 120" stroke="#C9A84C" stroke-width="0.4" fill="none" opacity="0.35"/>
+
+        <!-- Small diamond accents along bottom -->
+        <rect class="arch-detail-late" x="326" y="826" width="8" height="8" rx="1" fill="none" stroke="#C9A84C" stroke-width="0.6" transform="rotate(45 330 830)" opacity="0.4"/>
+        <rect class="arch-detail-late" x="195" y="826" width="6" height="6" rx="0.5" fill="none" stroke="#C9A84C" stroke-width="0.5" transform="rotate(45 198 829)" opacity="0.25"/>
+        <rect class="arch-detail-late" x="459" y="826" width="6" height="6" rx="0.5" fill="none" stroke="#C9A84C" stroke-width="0.5" transform="rotate(45 462 829)" opacity="0.25"/>
+      </svg>
+    </div>
+
+    <!-- Top ornament -->
+    <div class="top-ornament">
+      <div class="ornament-line"></div>
+      <div class="ornament-diamond"></div>
+      <div class="ornament-line"></div>
+    </div>
+
+    <div class="est-text">Premium Craft Experience</div>
+
+    <!-- MAIN BRAND NAME -->
+    <h1 class="brand-name">Marathwada</h1>
+
+    <!-- Beer mug emblem -->
+    <div class="emblem">
+      <svg viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Beer mug body -->
+        <rect x="12" y="14" width="22" height="26" rx="2" stroke="#C9A84C" stroke-width="0.8" fill="none"/>
+        <!-- Handle -->
+        <path d="M34 19 Q42 19 42 27 Q42 35 34 35" stroke="#C9A84C" stroke-width="0.8" fill="none"/>
+        <!-- Foam bubbles -->
+        <ellipse cx="18" cy="14" rx="4" ry="3" stroke="#C9A84C" stroke-width="0.5" fill="none"/>
+        <ellipse cx="25" cy="12" rx="5" ry="3.5" stroke="#C9A84C" stroke-width="0.5" fill="none"/>
+        <ellipse cx="31" cy="14" rx="3.5" ry="2.8" stroke="#C9A84C" stroke-width="0.5" fill="none"/>
+        <!-- Liquid lines -->
+        <line x1="16" y1="24" x2="30" y2="24" stroke="#C9A84C" stroke-width="0.3" opacity="0.4"/>
+        <line x1="16" y1="30" x2="30" y2="30" stroke="#C9A84C" stroke-width="0.3" opacity="0.3"/>
+      </svg>
+    </div>
+
+    <!-- Ornamental divider with wheat -->
+    <div class="name-divider">
+      <svg viewBox="0 0 340 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="divGold" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="transparent"/>
+            <stop offset="50%" stop-color="#C9A84C"/>
+            <stop offset="100%" stop-color="transparent"/>
+          </linearGradient>
+        </defs>
+        <line x1="0" y1="14" x2="120" y2="14" stroke="url(#divGold)" stroke-width="0.7"/>
+        <line x1="220" y1="14" x2="340" y2="14" stroke="url(#divGold)" stroke-width="0.7"/>
+        <!-- Left wheat -->
+        <ellipse cx="130" cy="12" rx="5" ry="2" fill="none" stroke="#C9A84C" stroke-width="0.5" transform="rotate(-30 130 12)"/>
+        <ellipse cx="136" cy="9" rx="5" ry="2" fill="none" stroke="#C9A84C" stroke-width="0.5" transform="rotate(-20 136 9)"/>
+        <ellipse cx="139" cy="14" rx="5" ry="2" fill="none" stroke="#C9A84C" stroke-width="0.5" transform="rotate(-35 139 14)"/>
+        <!-- Center diamond -->
+        <rect x="166" y="10" width="8" height="8" rx="1" fill="none" stroke="#C9A84C" stroke-width="0.8" transform="rotate(45 170 14)"/>
+        <rect x="168" y="12" width="4" height="4" rx="0.5" fill="#C9A84C" opacity="0.5" transform="rotate(45 170 14)"/>
+        <!-- Right wheat -->
+        <ellipse cx="210" cy="12" rx="5" ry="2" fill="none" stroke="#C9A84C" stroke-width="0.5" transform="rotate(30 210 12)"/>
+        <ellipse cx="204" cy="9" rx="5" ry="2" fill="none" stroke="#C9A84C" stroke-width="0.5" transform="rotate(20 204 9)"/>
+        <ellipse cx="201" cy="14" rx="5" ry="2" fill="none" stroke="#C9A84C" stroke-width="0.5" transform="rotate(35 201 14)"/>
+      </svg>
+    </div>
+
+    <div class="brand-subtitle">Beer Bar</div>
+
+    <!-- Wheat & hops motif -->
+    <div class="wheat-motif">
+      <svg viewBox="0 0 180 55" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Left wheat stalk -->
+        <path d="M45 50 Q50 32 55 26" stroke="#C9A84C" stroke-width="0.7" fill="none"/>
+        <ellipse cx="51" cy="40" rx="5" ry="2.5" fill="none" stroke="#C9A84C" stroke-width="0.5" transform="rotate(-25 51 40)"/>
+        <ellipse cx="53" cy="34" rx="5" ry="2.5" fill="none" stroke="#C9A84C" stroke-width="0.5" transform="rotate(-15 53 34)"/>
+        <ellipse cx="48" cy="36" rx="5" ry="2.5" fill="none" stroke="#C9A84C" stroke-width="0.5" transform="rotate(-40 48 36)"/>
+        <ellipse cx="55" cy="29" rx="4" ry="2" fill="none" stroke="#C9A84C" stroke-width="0.5" transform="rotate(-10 55 29)"/>
+        <ellipse cx="51" cy="30" rx="4" ry="2" fill="none" stroke="#C9A84C" stroke-width="0.5" transform="rotate(-35 51 30)"/>
+        <!-- Center hops -->
+        <ellipse cx="90" cy="24" rx="9" ry="12" fill="none" stroke="#C9A84C" stroke-width="0.6"/>
+        <path d="M83 19 Q90 16 97 19" stroke="#C9A84C" stroke-width="0.4" fill="none"/>
+        <path d="M82 24 Q90 20 98 24" stroke="#C9A84C" stroke-width="0.4" fill="none"/>
+        <path d="M83 29 Q90 25 97 29" stroke="#C9A84C" stroke-width="0.4" fill="none"/>
+        <path d="M85 33 Q90 30 95 33" stroke="#C9A84C" stroke-width="0.4" fill="none"/>
+        <path d="M90 36 L90 50" stroke="#C9A84C" stroke-width="0.6"/>
+        <path d="M87 40 L90 42 L93 40" stroke="#C9A84C" stroke-width="0.4" fill="none"/>
+        <!-- Right wheat stalk -->
+        <path d="M135 50 Q130 32 125 26" stroke="#C9A84C" stroke-width="0.7" fill="none"/>
+        <ellipse cx="129" cy="40" rx="5" ry="2.5" fill="none" stroke="#C9A84C" stroke-width="0.5" transform="rotate(25 129 40)"/>
+        <ellipse cx="127" cy="34" rx="5" ry="2.5" fill="none" stroke="#C9A84C" stroke-width="0.5" transform="rotate(15 127 34)"/>
+        <ellipse cx="132" cy="36" rx="5" ry="2.5" fill="none" stroke="#C9A84C" stroke-width="0.5" transform="rotate(40 132 36)"/>
+        <ellipse cx="125" cy="29" rx="4" ry="2" fill="none" stroke="#C9A84C" stroke-width="0.5" transform="rotate(10 125 29)"/>
+        <ellipse cx="129" cy="30" rx="4" ry="2" fill="none" stroke="#C9A84C" stroke-width="0.5" transform="rotate(35 129 30)"/>
+      </svg>
+    </div>
+
+    <!-- Bottom ornament -->
+    <div class="bottom-ornament">
+      <div class="ornament-line"></div>
+      <div class="ornament-diamond"></div>
+      <div class="ornament-line"></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- BRAND SHOWCASE -->
+<section class="showcase">
+  <div class="section-label" data-scroll>Brand Palette</div>
+  <div class="palette-row">
+    <div class="palette-swatch swatch-black" data-scroll data-delay="0"><span>#0A0A0A</span></div>
+    <div class="palette-swatch swatch-charcoal" data-scroll data-delay="80"><span>#111111</span></div>
+    <div class="palette-swatch swatch-gold-dark" data-scroll data-delay="160"><span>#8B6914</span></div>
+    <div class="palette-swatch swatch-gold" data-scroll data-delay="240"><span>#C9A84C</span></div>
+    <div class="palette-swatch swatch-gold-light" data-scroll data-delay="320"><span>#E8D48B</span></div>
+    <div class="palette-swatch swatch-cream" data-scroll data-delay="400"><span>#F5E6C8</span></div>
+  </div>
+  <div class="section-label" data-scroll>Typography</div>
+  <div class="type-showcase">
+    <div class="type-sample-primary" data-scroll>Cinzel — Display</div>
+    <div class="type-sample-secondary" data-scroll>Cormorant Garamond — Accent & Taglines</div>
+    <div class="type-sample-body" data-scroll>Inter — Body text, menus, and supporting information. Clean geometric forms pair with the ornate serif to reinforce a premium-but-approachable character.</div>
+  </div>
+</section>
+
+<!-- VARIANTS -->
+<section class="variant-section">
+  <div class="section-label" data-scroll>Logo Variants</div>
+  <div class="variant-wrapper" data-scroll>
+    <div class="variant-card variant-dark">
+      <div class="v-name">Marathwada</div>
+      <div class="v-sub">Beer Bar</div>
+    </div>
+    <div class="variant-label">Dark background</div>
+  </div>
+  <div class="variant-wrapper" data-scroll>
+    <div class="variant-card variant-light">
+      <div class="v-name">Marathwada</div>
+      <div class="v-sub">Beer Bar</div>
+    </div>
+    <div class="variant-label">Light background</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<section class="brand-footer">
+  <div class="footer-tagline" data-scroll>Where heritage meets the finest pour</div>
+  <div class="footer-line" data-scroll></div>
+</section>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const delay = el.getAttribute('data-delay') || 0;
+        setTimeout(() => el.classList.add('visible'), parseInt(delay));
+        observer.unobserve(el);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('[data-scroll]').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
